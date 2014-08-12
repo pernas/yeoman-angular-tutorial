@@ -1,9 +1,46 @@
-<div ng-controller="MainCtrl">
-  <h2>HOLA</h2>
-  <h3>{{name}}</h3>
+<div class="container" >
+  <h2>My ToDoS</h2>
+
+  <!-- Todos input -->
+  <form role="form" ng-submit="mc.addTodo()">
+    <div class="row">
+      <div class="input-group">
+        <input type="text" 
+               ng-model="mc.toAdd" 
+               placeholder="What needs to be done?" 
+               class="form-control"/>
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="Add"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <p></p>
+
+  <!-- Todos list -->
+  <div ui-sortable ng-model="mc.todos">
+    <p class="input-group" ng-repeat="todo in mc.todos" 
+       style="padding:5px 10px; cursor: move;">
+      <input type="text" ng-model="todo" class="form-control"/>
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="mc.removeTodo($index)" 
+                aria-label="Remove">X</button>
+      </span>
+    </p>
+  </div>
+
 </div>
 
-<div ng-controller="jeanController">
+<!-- <div ng-controller="JaumeController">
+  <h2>HOLA</h2>
+  <input type="text" 
+       ng-model="name" 
+       placeholder="Com anem" 
+       class="form-control">
+  <h3>{{name}}</h3>
+</div> -->
+
+<!-- <div ng-controller="jeanController">
   <h2>HOLA</h2>
   <h3>{{nom}}</h3>
 </div>
@@ -11,4 +48,4 @@
 <div ng-controller="philController as phil">
   <h2>HOLA</h2>
   <h3>{{phil.nom}}</h3>
-</div>
+</div> -->

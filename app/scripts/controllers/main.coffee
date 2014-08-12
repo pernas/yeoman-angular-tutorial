@@ -1,39 +1,47 @@
 'use strict'
 
-###*
- # @ngdoc function
- # @name mytodoApp.controller:MainCtrl
- # @description
- # # MainCtrl
- # Controller of the mytodoApp
-###
-angular.module('mytodoApp')
-  .controller 'MainCtrl', ($scope) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
-    $scope.name = "Jaume"
-
-################################################################################
-# class way with scope
-
-class JeanController
-    constructor: ($scope) ->
-        $scope.nom = "Jean-Pierre"
+class MainCtrl
+    constructor: (@localStorageService, @$scope) ->
+        todosInStore = @localStorageService.get("todos")
+        @todos = todosInStore and todosInStore.split("\n") or []
+        @$scope.$watch "mc.todos", 
+                       (=> @localStorageService.add "todos", @todos.join("\n")), 
+                       true
+    addTodo: ->
+        @todos.push @toAdd
+        @toAdd = ''
+    removeTodo: (index) ->
+        @todos.splice index, 1
 
 angular.module('mytodoApp')
-    .controller 'jeanController', ['$scope', JeanController]
+    .controller 'MainCtrl', ['localStorageService','$scope', MainCtrl]
 
-################################################################################
-# class way without scope
+# ################################################################################
+# # no class CoffeeScript way with scope
 
-class PhilController
-    constructor: ->
-        @nom = "Philippe"
+# angular.module('mytodoApp')
+#   .controller 'JaumeController', ($scope) ->
+#     $scope.name = "Jaume"
+#     $scope.$watch "name", (-> alert $scope.name), true
 
-angular.module('mytodoApp')
-    .controller 'philController', [PhilController]
+# ################################################################################
+# # class way with scope
 
-################################################################################
+# class JeanController
+#     constructor: ($scope) ->
+#         $scope.nom = "Jean-Pierre"
+
+# angular.module('mytodoApp')
+#     .controller 'jeanController', ['$scope', JeanController]
+
+# ################################################################################
+# # class way without scope
+
+# class PhilController
+#     constructor: ->
+#         @nom = "Philippe"
+
+# angular.module('mytodoApp')
+#     .controller 'philController', [PhilController]
+
+# ################################################################################

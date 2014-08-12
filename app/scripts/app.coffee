@@ -15,13 +15,20 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.sortable',
+    'LocalStorageModule'
   ])
+  .config [ "localStorageServiceProvider",
+            (localStorageServiceProvider) -> 
+             localStorageServiceProvider.setPrefix "ls"
+          ]
+          
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
+        controller: 'MainCtrl as mc'
       .when '/about',
         templateUrl: 'views/about.html'
         controller: 'AboutCtrl'
