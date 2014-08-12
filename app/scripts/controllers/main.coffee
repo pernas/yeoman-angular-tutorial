@@ -15,33 +15,3 @@ class MainCtrl
 
 angular.module('mytodoApp')
     .controller 'MainCtrl', ['localStorageService','$scope', MainCtrl]
-
-# ################################################################################
-# # no class CoffeeScript way with scope
-
-# angular.module('mytodoApp')
-#   .controller 'JaumeController', ($scope) ->
-#     $scope.name = "Jaume"
-#     $scope.$watch "name", (-> alert $scope.name), true
-
-# ################################################################################
-# # class way with scope
-
-# class JeanController
-#     constructor: ($scope) ->
-#         $scope.nom = "Jean-Pierre"
-
-# angular.module('mytodoApp')
-#     .controller 'jeanController', ['$scope', JeanController]
-
-# ################################################################################
-# # class way without scope
-
-# class PhilController
-#     constructor: ->
-#         @nom = "Philippe"
-
-# angular.module('mytodoApp')
-#     .controller 'philController', [PhilController]
-
-# ################################################################################
